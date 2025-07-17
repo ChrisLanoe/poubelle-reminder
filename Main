@@ -2,5 +2,5 @@ git init
 git add index.html
 git commit -m "Ajout de la page ICS"
 git branch -M main
-git remote add origin https://chrislanoe.github.io/poubelle-reminder/
+git remote add origin https://ChrisLanoe.github.io/poubelle-reminder/
 git push -u origin main
