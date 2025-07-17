@@ -1,0 +1,6 @@
+git init
+git add index.html
+git commit -m "Ajout de la page ICS"
+git branch -M main
+git remote add origin https://github.com/<ChrisLanoe>/poubelle-reminder.git
+git push -u origin main
