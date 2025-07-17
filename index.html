@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rappel poubelle</title>
+</head>
+<body>
+<script>
+// 1. On calcule aujourd'hui à 16:30
+const d = new Date();
+d.setHours(16, 30, 0, 0);
+
+// Format ICS
+function toIcs(d) {
+  return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+}
+const dtstart = toIcs(d);
+const dtend   = toIcs(new Date(d.getTime() + 15*60*1000));
+
+// Contenu du .ics
+const ics = [
+  'BEGIN:VCALENDAR',
+  'VERSION:2.0',
+  'PRODID:-//GitHubPages//PoubelleReminder//FR',
+  'BEGIN:VEVENT',
+  'DTSTAMP:'+toIcs(new Date()),
+  'DTSTART:'+dtstart,
+  'DTEND:'+dtend,
+  'SUMMARY:Pense à descendre la poubelle pleine en partant ! :)',
+  'END:VEVENT',
+  'END:VCALENDAR'
+].join('\r\n');
+
+// Téléchargement auto
+const blob = new Blob([ics], { type: 'text/calendar' });
+const url  = URL.createObjectURL(blob);
+const a    = document.createElement('a');
+a.href     = url;
+a.download = 'poubelle.ics';
+a.click();
+</script>
+<p>Si rien ne se passe, <a href="#" id="dl">téléchargez le rappel</a>.</p>
+<script>
+document.getElementById('dl').href = url;
+</script>
+</body>
+</html>
